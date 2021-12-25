@@ -1,3 +1,5 @@
+
+``` javascript
 const path = require('path'); 
 const RefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin'); // 새로고침
 
@@ -58,7 +60,7 @@ module.exports = {
     hot: true,
   },
 };
-
+```
 
 프리셋은 하나로 보이지만 수십개의 플러그인들이 합쳐진 것임
 
