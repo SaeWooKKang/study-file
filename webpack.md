@@ -7,7 +7,7 @@ const RefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin'); //
 
 module.exports = {
   name: 'webpack-setting',
-  mode: 'development', // 현재: 개발용 실서비스: production으로 변경
+  mode: 'development', // 현재: 개발용, 실서비스: production으로 변경
   devtool: 'eval', // 빠르게 하겠다는거
   resolve: {
     extensions: ['.js', '.jsx'] // 확장자 알아서 찾아줌
@@ -50,12 +50,12 @@ module.exports = {
   output: {
     path: path.join(__dirname,'dist'), // __dirname : 현재 폴더 경로 
     filename: 'app.js'
-    publicPath: './dist',
+    publicPath: '/dist',
   }, 
 
   //서버
   devServer: {
-    devMiddleWare: {publicPath: './dist'},
+    devMiddleWare: {publicPath: '/dist'},
     static: {directory: path.resolve(__dirname)},
     hot: true,
   },
@@ -63,7 +63,5 @@ module.exports = {
 ```
 
 프리셋은 하나로 보이지만 수십개의 플러그인들이 합쳐진 것임
-
-플러그인들의 모음이 프리셋
 
 핫 리로딩은 기존 데이터 유지 하면서 바꿔줌
