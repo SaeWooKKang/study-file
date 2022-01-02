@@ -44,7 +44,7 @@ module.exports = {
   //확장 프로그램 
   plugins: [
     new RefreshWebpackPlugin()
-  ],
+  ],~₩
 
   // 출력
   output: {
