@@ -1,23 +1,14 @@
-map을 이터러블과 관련지어서 설명하고 있음 
-
-내가 알던 map은 단순히 배열에서 메서드 호출시 1:1 대응 되는걸로 알고 있었는데 
-
-강의에서는 
-
-ES6 -> 배열은 이터러블이 됨 -> map 가능 
-
-직접 map을 구현해보자 
-
+# map 구현
 
 상품의 이름만 뽑아서 새로운 배열 만들기
+
 ```javascript
 const products = [
   {name: 'a', price:100},
   {name: 'b', price:200},
   {name: 'c', price:300}
 ];
-
-// -- 이전 사용 -- 
+ 
 let names = [];
 
 for(let i = 0; i < products.length; i++){
@@ -35,4 +26,17 @@ const map = (f, iter) => {
   return res;
 };
 console.log(map(p=>p.name, products)); // ['a', 'b', 'c']
+```
+
+## 이터러블 프로토콜을 따른 map의 다형성
+
+map 프로토타입 메서드를 갖지 않지만 이터러블이다.
+
+```javascript
+const doc = document.querySelectorAll('*') 
+```
+
+이터러블 이므로 위에 작성한 map 함수로
+``` javascript
+const arr1 = map((el)=>{el.nodeName}, doc) 가능
 ```
