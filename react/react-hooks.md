@@ -53,12 +53,19 @@ useCallback(()=>{},[])
 
 ### Effect Hook: useMemo
 
-* 복잡한 함수 결과값을 기억 
-* 특정 결과값을 재사용
+```javacript
+// 생성함수와 의존성 값의 배열 전달
+const memoizedValue = useMemo(() => computeExpensiveValue(a,b),[a,b]);
+```
 
-```
-useMemo(()=>{},[])
-```
+* 복잡한 함수 결과값을 기억 
+* 반복되는 고비용 계산 방지 
+* useMemo에 전달된 함수는 렌더링 중에 실행
+* 함수 안에서 참조하는 모든 값은 의존성 배열에 추가해야 함 
+
+const func = x => x+1
+func(a) // a+1이라는 동일한 값을 반환
+
 
 ### Effect Hool: useRef
 * 일반 값을 기억 
