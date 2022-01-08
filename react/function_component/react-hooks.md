@@ -6,6 +6,8 @@ Hook은 계층의 변화 없이 상태 관련 로직을 재사용할 수 있도�
 
 Hook은 함수 컴포넌트에서 React state와 생명주기 기능(lifecycle features)을 “연동(hook into)“할 수 있게 해주는 함수
 
+---
+
 ## 내장 Hook
 
 ### State Hook: useState
@@ -53,7 +55,7 @@ useCallback(()=>{},[])
 
 ### Effect Hook: useMemo
 
-```javacript
+```javascript
 // 생성함수와 의존성 값의 배열 전달
 const memoizedValue = useMemo(() => computeExpensiveValue(a,b),[a,b]);
 ```
@@ -63,11 +65,7 @@ const memoizedValue = useMemo(() => computeExpensiveValue(a,b),[a,b]);
 * useMemo에 전달된 함수는 렌더링 중에 실행
 * 함수 안에서 참조하는 모든 값은 의존성 배열에 추가해야 함 
 
-const func = x => x+1
-func(a) // a+1이라는 동일한 값을 반환
-
-
-### Effect Hool: useRef
+### Effect Hook: useRef
 * 일반 값을 기억 
 * 컴포넌트가 리렌더링시 기존 값을 기억해야 할 경우 사용
 
