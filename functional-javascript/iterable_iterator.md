@@ -29,7 +29,7 @@ const iterable = {
     return {
       // next 메서드는 이터레이터 리절트 객체를 반환
       next(){
-        return i == 0 ? {done:true} ! {value: i--, done:false }
+        return i == 0 ? {done:true} : {value: i--, done:false }
       },
       [Symbloe.iterator](){
         return this;
