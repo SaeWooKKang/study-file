@@ -39,7 +39,14 @@ class WordRelay extends React.Component{
   componentDidUpdate(){
     console.log('did update');
   }
+  // 비동기 요청 정리 
+  componentWillUnmount() {
+     // componentDidMount에서 비동기 요청후 컴포넌트가 종료되면
+     // 언마운트 하지 않았을 경우 비동기 요청이 계속 살아 있다.
 
+     // ex) setInterval(()=>{log('zombie)},1000)
+     // 컴포넌트 종료시에도 로그를 계속 찍음.
+  }
   render() {
     return (
       <div>
