@@ -1,7 +1,7 @@
 ## 참고 
 📂 **순서도**
 
->* [공식문서](https://react-redux.js.org)
+>* [React-Redux](https://react-redux.js.org)
 
 📂 **react**  
  
