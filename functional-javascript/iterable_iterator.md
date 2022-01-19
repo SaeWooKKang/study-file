@@ -15,9 +15,18 @@ ES6에서는 이터레이션 프로토콜을 준수하는 이터러블로 통일
 
 ## for...of 문
 
-for (변수선언문 in 이터러블){...}
+for (변수선언문 of 이터러블){...}
 
 내부적으로 이터레이터의 next 메서드를 호출하여 이터러블을 순회하며 next 메서드가 반환한 이터레이터 리절트 객체의 value 프로퍼티 값을 for...of문의 변수에 할당한다.
+
+### for...of 문 직접 구현
+``` javascript 
+let cur;
+iter = iter[Symbol.iterator];
+while(!(cur = iter.next()).done) {
+  const a = cur.value;
+}
+```
 
 ## 사용자 정의 이터러블
 
@@ -31,7 +40,7 @@ const iterable = {
       next(){
         return i == 0 ? {done:true} : {value: i--, done:false }
       },
-      [Symbloe.iterator](){
+      [Symbol.iterator](){
         return this;
       }
     }
@@ -43,4 +52,5 @@ console.log(iterator.next()); //{value: 2, done:false}
 console.log(iterator.next()); //{value: 1, done:false}
 
 for (const a of iterator) console.log(a); // 3  2  1
+log(iterator[Symbol.iterator]()) // iterator
 ```
