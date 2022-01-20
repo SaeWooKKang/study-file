@@ -82,7 +82,7 @@ go(
 
 ## L.range,L.map,L.filter,take 중첩사용
 
-- 느긋한 계산
+- 느긋한 계산, 제 때 계산
 - 효율성 ⬆️
 
 ``` javascript
