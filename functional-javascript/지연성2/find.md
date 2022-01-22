@@ -8,7 +8,8 @@
 const find = (f, iter) => go(
   iter,
   filter(f),
-  take(1)
+  take(1),
+  ([a]) => a,
 );
 ```
 
@@ -17,7 +18,8 @@ const find = (f, iter) => go(
 const find = (f, iter) => go(
   iter,
   L.filter(f),
-  take(1)
+  take(1),
+  ([a]) => a,
 );
 ```
 

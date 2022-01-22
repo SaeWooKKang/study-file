@@ -9,14 +9,3 @@ const queryStr = str => go(
 
 log(queryStr({limit: 10, offset: 10, type: "noice"}));
 ```
-
-``` javascript
-const queryStr = str => go(
-  str,
-  Object.entries,
-  map(([k, v]) =>`${k}=${v}`),
-  reduce((a,b) => `${a}&${b}`)
-);
-
-log(queryStr({limit: 10, offset: 10, type: "noice"}))
-```
