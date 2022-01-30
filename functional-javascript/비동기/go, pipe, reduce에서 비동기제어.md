@@ -3,7 +3,7 @@
 go(1,
   a => a + 1,
   a => Promise.resolve(a + 10),
-  a => a + 100,
+  //a => a + 100,
   log
 );
 ```
@@ -43,7 +43,9 @@ const reduce = curry((f, acc, iter) => {
   while(!(cur = iter.next()).done) {
     const a = cur.value;
     // 계속해서 비동기 처리를 하게 됨
-    acc = acc instanceof Promise ? acc.then(acc => f(acc, a)) : f(acc, a)
+    acc = acc instanceof Promise 
+      ? acc.then(acc => f(acc, a)) 
+      : f(acc, a)
   }
   return acc;
 }); 
