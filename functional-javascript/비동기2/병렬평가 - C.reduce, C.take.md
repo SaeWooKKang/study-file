@@ -54,10 +54,9 @@ C.reduce = curry((f, acc, iter) => {
     ? reduce(f, acc, iter2) 
     : reduce(f, iter2)
 });
-
 ```
 
-### 함수 정리 
+### 1) 함수 정리 
 ``` javascript
 function noop () {}; 
 
@@ -70,6 +69,22 @@ C.reduce = curry((f, acc, iter) => {
     ? reduce(f, acc, iter2) 
     : reduce(f, iter2)
 });
+```
+### 2) 정리 
+``` javascript
+C.reduce = curry((f, acc, iter) => iter 
+  ? reduce(f, acc, catchNoop([...iter]))
+  : reduce(f, catchNoop([...acc])));
+```
+
+### 3) 정리 
+``` javascript
+const catchNoop = ([...arr]) =>
+  (arr.forEach(a => a instanceof Promise ? a.catch(noop) : a), arr);
+
+C.reduce = curry((f, acc, iter) => iter 
+  ? reduce(f, acc, catchNoop([iter]))
+  : reduce(f, catchNoop([acc])));
 ```
 
 ## C.take
