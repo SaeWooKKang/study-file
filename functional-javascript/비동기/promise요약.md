@@ -34,6 +34,7 @@ const promise = new Promise((resolve, reject) => {
 
 ### Promise 후속 처리 메서드
 - 비동기적으로 실행(콜 스택 이후 실행)
+- 프로미스 반환
 
 #### then 
 - 두 개의 콜백함수를 인수로 전달받음 
@@ -174,3 +175,22 @@ Promise.allsettled([requestData1(), requestData4()])
   //  {status: 'rejected', reason: Error...}
   // ]
 ```
+### 프로미스 처리 순서
+
+``` javascript
+const promise = new Promise(resolve => setTimeout(()=>resolve(5), 1000));
+
+p1.then(log);
+log('전역 콜스택');
+
+// 출력 순서
+// 1. 전역 콜스택 
+// 2. 5
+```
+
+1. Promise 생성자 함수는 런타임에 평가되어 변수에 할당과 wep api에 처리를 요청 후 즉시 종료
+2. 후속 처리 메서드와 콜백함수를 web api에 넘김  
+>web api는 프로미스를 처리하고 후속 처리 메서드의 콜백함수를 마이크로 테스크 큐에 넘김 
+3. log('전역 콜스택') 출력
+4. 콜스택이 비면 microtaskqueue에 등록되어 있는 then의 콜백 함수를 콜스택에 push 
+5. 추가 적인 후속처리가 체이닝 되어 있을시 마이크로태스크큐에 push

@@ -103,6 +103,6 @@ C.take = curry((l, iter) => {
 ``` 
 
 ### 2) 정리
-``` javscript
+``` javascript
 C.take = curry((l, iter) =>take(l, catchNoop([...iter])));
 ```
