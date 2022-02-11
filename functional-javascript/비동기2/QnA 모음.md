@@ -42,14 +42,13 @@ async function delayI(a) {
 ## async:await로 제어할 수 있는데 왜 파이프라인이 필요한지 ?
 > 비교 대상이 아니라 다른 문제를 해결하기 위한 두 개의 기술 
 
-**async:await의 목적** 
+**async:await의 목적**  
 프로미스를 then then then then 표현식으로 다루기 어렵다보니 async await 를 사용하여 특정부분에서 문장으로 다루기 위한 목적을 가지고 있음. (합성이 아닌 풀어놓을 목적)  
 함수 안쪽에서 명령형으로 문장을 사용하려 할 떄 사용하는 것이 await임
 
-**파이프라인의 목적**
+**파이프라인의 목적**  
 비동기 프로그래밍이 목적이 아니라 명령형 프로그래밍을 하지않고 안전하게 함수 합성을 하기 위한 목적 (동기냐 비동기냐의 관심 x)
 효과적으로 함수들을 조합하고 로직을 테스트하기 쉽고 유지보수하기 쉽게 하기 위한 목적
-
 
 ``` javascript
 async function f6(list) {
@@ -155,3 +154,57 @@ function f7(list) {
 ```
 
 ## 비동기 상황에서 에러 핸들링은 어떻게 해야 하는지 ?
+
+``` javascript
+function f8(list) {
+  try {
+    return list
+      .map(a => new Promise(resolve => {
+        resolve(JSON.parse(a));
+      }))
+      .filter(a => a % 2)
+      .slice(0, 2);
+  } catch (e) {
+    log(e, '----------------------');
+    return [];
+  }
+}
+log(f8(['0', '1', '2', '{']));
+// catch문에서 에러가 출력되는것이 아닌 filter에서 에러를 던지는 것
+// 프로미스를 잘 제어해줄수 있는상태의 함수들이 아니기 때문
+// 잘 처리하기가 생각보다 어렵다.
+```
+
+## 동기/비동기 에러 핸들링에서의 파이프 라인의 이점은 ?
+
+``` javascript
+async function f9(list) {
+  try {
+    return await go(
+      list,
+      map(a => new Promise(resolve => {
+        sdfasdf
+        resolve(JSON.parse(a));
+      })),
+      filter(a => a % 2),
+      take(2));
+  } catch (e) {
+    log(e, '----------------------');
+    return [];
+  }
+}
+
+f9(['0', '1', '2', '{']).then(a => log(a, 'f9')).catch(e => {
+  log('에러 핸들링 하겠다', e);
+});
+```
+```
+ catch에 걸리리면 try에서 await Promise.reject('----__!!') 형식으로 평가 되어야 함.  
+ async await 를 통해서 Promise.reject에 들어있는 에러까지를 꺼낼 수 있도록 할 수 있음  
+근데 그게 되려면 함수 합성이 연속적으로 잘 되어 있는 잘 결론지어져있는 프로미스로 전달 되어야 한다.
+
+에러 핸들링을 할때 프로미스에 await를 잘 걸어줘야 하고 잘 걸어주려면 함수 안쪽에서 나는 에러들이
+중간에 에러가 나도 Kleisli Composition 방식으로 에러를 안전하게합성해서 뒤로 연결해서 보내줄 수 있도록 
+준비가 되어 있어야 한다.
+파이프라인에는 그런 이점이있고 함수를 안전하게 합성할 수 있다.
+```
