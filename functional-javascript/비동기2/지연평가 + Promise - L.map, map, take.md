@@ -18,12 +18,20 @@
   );
 
   // L.map 비동기 처리 
-  // <내생각 map함수는 값을 반환하지 않고  res애 푸시해서 오류>
+  // <내생각 map함수는 값을 반환하지 않고  res애 푸시해서 오류> -> 가능함 
   L.map = curry(function *(f, iter) {
     for(const a of iter) {
       yield a instanceof Promise ? a.then(f) : f(a);
     }});
-  
+    
+  var map - curry((f, iter) => {
+    const res = [];
+    for (const a of ier) {
+      a instanceof Promise ? res.push(go1(a,f)) : res.push(f(a));
+    }
+    return res;
+  }); // 가능 
+
   go( 
     [Promise.resolve(1), Promise.resolve(2), Promise.resolve(3)],
     L.map(a => a * a),

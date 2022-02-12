@@ -44,7 +44,7 @@ async function delayI(a) {
 
 **async:await의 목적**  
 프로미스를 then then then then 표현식으로 다루기 어렵다보니 async await 를 사용하여 특정부분에서 문장으로 다루기 위한 목적을 가지고 있음. (합성이 아닌 풀어놓을 목적)  
-함수 안쪽에서 명령형으로 문장을 사용하려 할 떄 사용하는 것이 await임
+함수 안쪽에서 명령형으로 문장을 사용하려 할 때 사용하는 것이 await임
 
 **파이프라인의 목적**  
 비동기 프로그래밍이 목적이 아니라 명령형 프로그래밍을 하지않고 안전하게 함수 합성을 하기 위한 목적 (동기냐 비동기냐의 관심 x)
@@ -183,7 +183,7 @@ async function f9(list) {
     return await go(
       list,
       map(a => new Promise(resolve => {
-        sdfasdf
+        sdfasdf // <- 오류 
         resolve(JSON.parse(a));
       })),
       filter(a => a % 2),

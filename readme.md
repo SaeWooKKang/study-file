@@ -1,4 +1,7 @@
 ## 참고 
+📂 **JavaScript**
+>* [모던자바스크립트](http://www.yes24.com/Product/Goods/92742567)
+
 📂 **순서도**
 
 >* [React-Redux](https://react-redux.js.org)
@@ -7,7 +10,6 @@
  
 >* [웹 게임을 만들며 배우는 React](https://www.inflearn.com/course/web-game-react/dashboard)  
 >* [모던자바스크립트](http://www.yes24.com/Product/Goods/92742567)
-
 
 📂 **function-javascript**  
 
