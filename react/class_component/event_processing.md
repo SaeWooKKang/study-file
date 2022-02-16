@@ -28,7 +28,7 @@ class WordRelay extends React.Component{
 }
 ```
 
-
+// TODO 다시 읽어보기 
 ### 바인드 o 
 ```javascript
 class WordRelay extends React.Component{

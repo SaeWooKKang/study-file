@@ -46,6 +46,8 @@ class WordRelay extends React.Component{
 
      // ex) setInterval(()=>{log('zombie)},1000)
      // 컴포넌트 종료시에도 로그를 계속 찍음.
+
+     // 타이머 제거, 네트워크 요청 취소, componentDidMount()내에서 생성된 구독 해지 등등 작업 처리
   }
   render() {
     return (
