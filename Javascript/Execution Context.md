@@ -1,6 +1,6 @@
 # Execution Context
 
-js의 동작 원리를 담고있는 핵심 개념  
+- js의 동작 원리를 담고있는 핵심 개념  
 
 실행 컨택스트를 이해하면 다음을 이해할 수 있음.  
 
@@ -35,8 +35,6 @@ js의 동작 원리를 담고있는 핵심 개념
 - 함수 정의가 평가되는 시점에 상위 Lexical Environment Record를 참조함   
 - **스코프 체인을 가능**하게 함
 
-
-
 실행 컨텍스트 생성이 평가 과정이다
 
 ### 블럭 레벨 스코프 
@@ -46,7 +44,6 @@ var 키워드로 선언한 변수는 함수 내에서만 지역 변수로 사용
 **let**, **const**  
 let, const 키워드는 블록 안에서 선언 되면 지역 레벨 스코프를 갖는다.
 > 해당 블록의 실행이 종료되면 참조가 사라짐 
-
 
 ``` javascript
 let x = 1;
@@ -58,4 +55,4 @@ if(true) {
 log(x); // 1
 ```
 
-블록을 만나게 되면 새로운 Lexical Environment을 생성하고 기존 실행컨테스트의 L.E의 참조를 새로운 L.E로 참조를 변경한다. 
+블록을 만나게 되면 새로운 Lexical Environment을 생성하고 기존 실행컨테스트의 L.E의 참조를 새로운 L.E로 참조를 변경한다. L.E의 OuterLexicalEnvironmentReference는 상위 스코프를 참조한다.

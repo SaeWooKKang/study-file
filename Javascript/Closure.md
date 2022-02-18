@@ -64,3 +64,10 @@ console.log(counter(decrease));
 ```
 counter 전역 변수에 할당된 익명함수의 [[Environment]] 내부슬롯에서 즉시실행함수의 L.E를 참조하고 있다. counter 함수가 실행되면 counter함수의 L.E의 Outer Lexical Environment Reference가 즉시실행 함수의 L.E를 가리킴으로 스코프 체이닝을 통해 counter값 접근, 변경 가능
 > 전역변수 counter가 L.E 참고 하고 있으므로 계속 살아 있음 
+
+
+## 캡슐화
+
+객체의 상태를 나타내는 프로퍼티와 프로퍼티를 참조하고 조작할수 있는 동작인 메서드를 하나로 묶은것을 말한다
+
+>> 프로토타입 다시 공부하고, 예시 추가 할 것 

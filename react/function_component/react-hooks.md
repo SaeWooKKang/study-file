@@ -12,7 +12,7 @@ Hook은 함수 컴포넌트에서 React state와 생명주기 기능(lifecycle f
 
 ### State Hook: useState
 
-일반적으로 일반 변수는 함수가 끝날 때 사라지지만, state 변수는 React에 의해 사라지지 않습니다.
+일반적으로 일반 변수는 함수가 끝날 때 사라지지만, state 변수는 React에 의해 사라지지 않습니다.  
 useState 함수의 반환값: state 변수, 해당 변수를 갱신할 수 있는 함수 이 두 가지 쌍을 반환
 
 ```javascript
