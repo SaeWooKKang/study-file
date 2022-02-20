@@ -12,8 +12,10 @@ class WordRelay extends React.Component{
     console.log('클릭시 함수 호출은 됨');
     console.log(this); // window
 
-    // this는 window이므로 
-    // 인스턴스의 프로퍼티를 참조 할 수는 없음. 
+    // 이벤트 핸들러에 전달된 콜백함수는 함수다. 
+    // 따라서 함수로서 호출 된다.
+    // 함수로서 호출시 this는 window이므로 
+    // 인스턴스의 프로퍼티를 참조 할 수는 없다. 
     this.setState({click: true})// setState is not afunction
   }
 
@@ -77,7 +79,5 @@ class WordRelay extends React.Component{
     )
   }
 }
-
-
 ```
 
