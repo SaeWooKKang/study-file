@@ -2,7 +2,7 @@
 
 ## 함수 객체의 [[Environment]]
 
-함수 호출시 Lexical scope가 가능하려면 [[Environment]] 내부슬롯에 자신이 정의된 환경의 참조를 저장 해야함  
+- 함수 호출시 Lexical scope가 가능하려면 [[Environment]] 내부슬롯에 자신이 정의된 환경의 참조를 저장 해야함  
 
 ```
 함수 정의가 평가되어 함수 객체 생성시 [[Environment]]에 자신이 정의된 Lexical 환경의 참조 저장  
