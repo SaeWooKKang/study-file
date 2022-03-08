@@ -42,7 +42,8 @@ function test(name, time, f) {
     console.timeEnd(name);
   }
 
-test('range', 1, () => reduce(add, range(100000000)));
+// 전체를 순회 했으므로 결과는 같음
+test('range', 1, () => reduce(add, range(100000000))); 
 test('L.range', 1, () => reduce(add, L.range(100000000)));
 ```
 

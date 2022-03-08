@@ -23,8 +23,8 @@
     for(const a of iter) {
       yield a instanceof Promise ? a.then(f) : f(a);
     }});
-    
-  var map - curry((f, iter) => {
+
+  var map = curry((f, iter) => {
     const res = [];
     for (const a of ier) {
       a instanceof Promise ? res.push(go1(a,f)) : res.push(f(a));
