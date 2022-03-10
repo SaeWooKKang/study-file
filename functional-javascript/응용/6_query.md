@@ -18,11 +18,10 @@ function query1(obj) {
   }
   return res;
 }
+log(query1(obj1));
 ``` 
 
 ``` javascript
-log(query1(obj1));
-
 // 복잡한 reduce 하나로 처리했을 때
 function query2(obj) {
   return Object
