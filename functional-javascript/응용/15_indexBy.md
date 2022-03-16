@@ -23,7 +23,7 @@ log(
 
 // 함수의 결과 값으로 인덱스 설정 
 _.indexBy = (f, iter) => 
-  _.reduce((obj, a) => obj[f(a)] = a , {}, iter);
+  _.reduce((obj, a) => (obj[f(a)] = a, obj), {}, iter);
 
 const user2 = _.indexBy(u => u.id, users);
 

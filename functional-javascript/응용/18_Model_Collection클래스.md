@@ -56,3 +56,37 @@ _.go(
   _.each(log)
 );
 ```
+
+``` javascript
+// class Products extends Collection {
+  //   totalPrice() {
+  //     return _.go(this,
+  //       L.map(p => p.get('price')),
+  //       _.reduce(add)
+  //     )
+
+  //     // let total = 0;
+  //     // this._models.forEach(product => {
+  //     //   total += product.get('price');
+  //     // });
+  //     // return total;
+  //   }
+  // }
+const addAll = _.reduce(add);
+class Products extends Collection {
+  getPrices() {
+    return L.map(p => p.get('price'), this);
+  }
+  totalPrice() {
+    return addAll(this.getPrices());
+  }
+}
+
+const products = new Products();
+products.add(new Product({ id: 1, price: 10000}));
+log( products.totalPrice() );
+products.add(new Product({ id: 2, price: 25000}));
+log( products.totalPrice() );
+products.add(new Product({ id: 3, price: 35000}));
+log( products.totalPrice() );
+```
