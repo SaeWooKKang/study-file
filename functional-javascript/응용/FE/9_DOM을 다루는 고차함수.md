@@ -67,6 +67,18 @@ Ui.alert = Ui.message([
   { name: '확인', type: 'ok', value: true },
 ]);
 
+Ui.remover = (btnSel, targetSel, before = a => a, after = a => a) =>_.tap(
+  $.findAll(btnSel), // NodeList
+  $.on('click', async ({ currentTarget }) => // 구조분해로 불변적으로 다룸
+    await Ui.confirm('정말 삭제하시겠습니까?') &&
+      _.go(
+        currentTarget, // 현재 target에서
+        $.closest(targetSel), // 
+        _.tap(before),
+        $.remove,
+        _.tap(after)
+        )));
+
 // Ui.confirm('정말 삭제하시겠습니까?')
 
 // Images = namespace 
@@ -74,6 +86,7 @@ const Images = {};
   
 Images.fetch = () => new Promise(resolve => setTimeout(() => resolve([
   { name: "HEART", url: "https://s3.marpple.co/files/m2/t3/colored_images/45_1115570_1162087.png" },
+  { name: "하트", url: "https://s3.marpple.co/f1/2019/1/1235206_1548918825999_78819.png" }
 ]), 500));
 
 // iter 받아서 문자로 합쳐줌
@@ -110,15 +123,17 @@ Images.loader = limit => _.tap(
   _.each(_.each($.addClass('fade-in')))
 );
 
-C.takeAllWithLimit = _.curry((limit, iter) => {
+_.groupBySize = _.curry((size, iter) => {
   let r = L.range(Infinity);
-    return _.go(
-      iter, // generator
-      _.groupBy(_ => Math.floor(r.next().value / limit)), // 몫 끼리 묶기 
-      L.values, // [ [f, f, f, f], [f, f, f, f], ...]
-      L.map(L.map(f => f())), // [ [p, p, p, p], [],...]
-      L.map(C.takeAll));  
+  return _.groupBy(_ => Math.floor(r.next().value / size), iter);
 });
+
+C.takeAllWithLimit = _.curry((limit = Infinity, iter) => _.go(
+  iter, // generator
+  _.groupBySize(limit),
+  L.values, // [ [f, f, f, f], [f, f, f, f], ...]
+  L.map(L.map(f => f())), // [ [g, g, g, g], [],...]
+  L.map(C.takeAll)));
 
 _.go(
   Images.fetch(), // [ {}, {}, {}, ...]
@@ -126,12 +141,8 @@ _.go(
   $.el, // element로 만들고
   $.append($.qs('body')), // body에 element 추가 
   _.tap(log),
-  Images.loader(2),
-  $.findAll('.remove'), // NodeList
-  $.on('click', async ({ currentTarget }) => // 구조분해로 불변적으로 다룸
-    await Ui.confirm('정말 삭제하시겠습니까?') &&
-      _.go(
-        currentTarget, // 현재 target에서
-        $.closest('.image'), // 
-        $.remove)));
+  Ui.remover('.remove', '.image', _ => console.log('서버 통신')),
+  Images.loader(2)
+);
+
 ```
