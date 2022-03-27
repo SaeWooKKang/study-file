@@ -1,6 +1,7 @@
 ## 참고 
 📂 **JavaScript**
 >* [모던자바스크립트](http://www.yes24.com/Product/Goods/92742567)
+> * [코어 자바스크립트](http://www.yes24.com/Product/Goods/78586788)
 
 📂 **순서도**
 

@@ -1,0 +1,19 @@
+{
+  "name": "study-file",
+  "version": "1.0.0",
+  "description": "📂 **JavaScript** >* [모던자바스크립트](http://www.yes24.com/Product/Goods/92742567) > * [코어 자바스크립트](http://www.yes24.com/Product/Goods/78586788)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SaeWooKKang/study-file.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SaeWooKKang/study-file/issues"
+  },
+  "homepage": "https://github.com/SaeWooKKang/study-file#readme"
+}

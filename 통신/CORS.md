@@ -2,7 +2,7 @@
 
 #### SOP(Same Origin Policy)
 ```
-Same Origin: protocol + prot + host가 같아야함
+Same Origin: protocol + port + host가 같아야함
 ```
 보안상의 이유로 브라우저는 교차출처(서로 다른 주소) HTTP 요청을 제한함.  
 

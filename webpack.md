@@ -1,9 +1,7 @@
-
+#### 예시
 ``` javascript
 const path = require('path'); 
 const RefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin'); // 새로고침
-
-
 
 module.exports = {
   name: 'webpack-setting',
@@ -62,6 +60,6 @@ module.exports = {
 };
 ```
 
-프리셋은 하나로 보이지만 수십개의 플러그인들이 합쳐진 것임
+- 프리셋은 하나로 보이지만 수십개의 플러그인들이 합쳐진 것임
 
-핫 리로딩은 기존 데이터 유지 하면서 바꿔줌
+- 핫 리로딩은 기존 데이터 유지 하면서 바꿔줌

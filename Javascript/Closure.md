@@ -23,8 +23,8 @@ function outer() {
 const innerFunc = outer();
 innerFunc();
 ```
-outer 함수는 런타임에 호출되어 inner 함수를 반환하는데 outer함수가 종료되어 콜스택에서 pop되어도 전역변수 innerFunc이 참고 하고 있기 때문에 Outer 함수의 Lecical 환경은 제거 되지 않는다.  
-또한 outer함수가 반환한 inner함수는 평가 당시의 Lexical 환경을 [[Environment]]에 기억 하고 있으므로 함수 호출시 L.E의 OuterLecicalEnvironmentReference의 내부슬롯에 참조값을 연결하여 스코프 체이닝을 가능하게 함.
+outer 함수는 런타임에 호출되어 inner 함수를 반환하는데 outer함수가 종료되어 콜스택에서 pop되어도 전역변수 innerFunc이 inner 함수를 참조 하고 있고, inner 함수는 [[Environment]] 내부슬롯에 생성 당시의 환경 즉 outer함수의 L.E를 참조 하고 있기 때문에 Outer 함수의 Lecical 환경은 제거 되지 않는다.  
+outer함수가 반환한 inner함수는 평가 당시의 Lexical 환경을 [[Environment]]에 기억 하고 있으므로 함수 호출시 L.E의 OuterLecicalEnvironmentReference의 내부슬롯에 참조값을 연결하여 스코프 체이닝을 가능하게 함.
 
 ### 클로저 활용 
 - 클로저는 상태를 안전하게 변경하고, 유지하기 위해 사용
