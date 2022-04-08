@@ -1,6 +1,7 @@
 # SCSS
 
 ## 특징
+- 선택자 중첩 가능 
 - 변수 : '$'
 - Partials : _partials.scss / @use 'partials'
 - Mixins : @mixin / @include
