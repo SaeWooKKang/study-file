@@ -3,6 +3,10 @@
 
 이러한 과정을 **재조정**이라 한다. 
 
+## virtual DOM 장점
+
+- virtualDOM과 RealDOM을 비교해서 변경사항을 반영하므로 DOM 조작을 최소화하여 성능이 올라가는 장점이있음.
+
 ## 재조정(Reconciliation)  
 
 ### 휴리스틱 알고리즘 
