@@ -67,3 +67,30 @@ foo(js);
 - 변수명에 타입 정보 쓰지 말 것.
 - 타입 시그니처를 보고 알 수 있는것을 작성하지 말 것. 
 - 타입 정보를 작성할 것 -> 수정되어도 유효하다.
+
+#### 아이템 31: 타입 주변에 null 값 배치하기
+- 동시에 초기화 되는 두개의 변수가 있을때, 하나의 변수로 null이 아님을 체크하는것은 타입 시스템에서는 표현할 수 없다. 
+- 따라서 한 값의 null 여부가 다른 값의 null 여부에 암시적으로 관련되도록 설계하면 안됨
+#### 아이템 32: 유니온의 인터페이스보다는 인터페이스의 유니온을 사용하기 
+요약
+- 유니온의 인터페이스보다 인터페이스의 유니온이 타입스크립트가 이해하기 좋다. 
+- 태그된 유니온을 사용할 수 있다면 사용하자 
+
+이해
+- 이전에 '__태그된 유니온__'이라는 말이 여러번 등장했지만 이번 아이템에서 '태그'라는 말을 이해할 수 있었다. 타입 설계시 무효화 될 수 있는 타입을 구분해서 작성 할 때 속성 중의 하나가 문자열 리터럴 타입이 되는데 이 속성(type)을 '__태그__'라고 한다.
+
+- '__유니온의 인터페이스__'
+  ``` javascript 
+  interface Layer {
+    layout: aLayout | bLayout | cLayout;
+    paint: aPaint | bPaint | cPaint;
+  }
+  ```
+- '__인터페이스 유니온__'
+  ``` javascript
+  interface aLayer {layout: aLayout; paint: aPaint}
+  interface bLayer {layout: bLayout; paint: bPaint}
+  interface cLayer {layout: cLayout; paint: cPaint}
+
+  interface Layer = aLayer | bLayer | cLayer;
+  ```
