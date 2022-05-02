@@ -104,6 +104,7 @@ foo(js);
 이해
 - K extends keyof T 가 이해가 잘안됨 
 - extends 키워드 다시 보기 
+- 두번째 제너릭 타입을 줘서 범위를 좁힌듯  ?
 
 #### 아이템 34: 부정확한 타입보다는 미완성 타입을 사용하기
 - 타입을 정밀하게 만들려고 실수 하지말고 
@@ -133,9 +134,31 @@ foo(js);
 
 #### 아이템 39: any를 구체적으로 변형해서 사용하기 
 - any는 모든 값이 할당 가능하므로 더 구체적으로 표현 가능한 타입이 존재할 가능성이 높다. 
+- 구체적으로 any를 작성해서 안정성을 높일 수 있다.
 - 함수의 매개변수에 배열을 넣는다 할 때 any 대신 any[] 
 - 함수의 매개변수에 객체를 넣는다 할 때 any 대신 {[key: string]: any}
 - 함수 타입에도 () => any, (arg: any) => any, (...arg: any[]) => any 사용하기 
 
 이해
 - 마이그레이션시 noImplicityAny 설정키고, any 적용하고, 변경하면 될듯 ?
+
+#### 아이템 41: any의 진화를 이해하기
+- noImplicitAny가 설정되어 있고, 변수가 초기화 되어있지 않고 또는 배열이 빈배열이면 any는 진화한다. 
+- any 진화 지양하고 명시적으로 작성하자 
+``` javascript
+let a; // null
+if ( Math.randon() < 0.5 ) {
+ let a = 11; // number
+} else {
+  let a = 'abc';
+}
+a // number | string
+```
+
+#### 아이템 42: 모르는 타입에는 any 대신 unknown 사용하기
+- 반환값에 any를 사용하지말고 unknown을 사용하자 
+- any를 사용하면 타입체커가 무용지물된다. 
+
+이해
+- unknown은 어떤 타입이든 unknown에 할당가능하고, 
+- 할당은 unknown과 any만 가능함.
