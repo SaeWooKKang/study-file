@@ -51,9 +51,3 @@
 
 - 이해 
 keyof typeof를 나란히 쓴 예제를 통해 typeof의 개념을 확실히 함
-
-#### 아이템 55: DOM 계층 구조 이해하기 
-요약
-- Event의 currentTarget 속성의 타입은 EventTarget | null
-- childern은 HTMLCollection
-- childNodes는 NodeList (배열과 유사한 Node의 컬렉션)
