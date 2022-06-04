@@ -78,6 +78,16 @@ promiseGet(wrongUrl)
 ### Promise 체이닝
 - then 핸들러에서 값을 반환하는 경우 Promise.resolve(<값>)을 반환하는것과 같다.
 
+#### 설명
+- 후속 처리 메서드의 반환 값이 프로미스라면 프로미스를 반환하고, 프로미스가 아니라면 resolve해서 반환  
+- 즉 resolve(<값>) 형태이므로 프로미스를 반환하고, 프로미스의 처리상태는 **fulfilled**이다.
+
+``` javascript
+const p1 = Promise.resolve(1000); // {<fulfilled>: 1000}
+
+const p2 = Promise.resolve(1000).then(res => res + 1); // {<fulfilled>: 1001}
+```
+
 ``` javascript
 Promise.resolve('foo')
   .then(string => new Promise(resolve => 
@@ -166,15 +176,22 @@ Promise.race([requestData1(), requestData2(), requestData3()])
 
 - 프로미스를 요소로 갖는 이터러블을 인수로 받음
 - 전달받은 요소가 모두 settled 상태가 되면 처리결과 배열로 반환
+- 반환값은 프로미스
 
 ``` javascript
-Promise.allsettled([requestData1(), requestData4()])
-  .then(log);
+// Promise + 후속처리 메서드
+Promise.allsettled( [requestData1(), requestData4()] )
+  .then(consol.log);
   // [
   //  {status: 'fulfilled', value: 1}
   //  {status: 'rejected', reason: Error...}
   // ]
+
+// Promise + await
+const p = await Promise.allsettled( [requestData1(), requestData4()] )
+console.log(p);
 ```
+
 ### 프로미스 처리 순서
 
 ``` javascript
@@ -194,3 +211,56 @@ log('전역 콜스택');
 3. log('전역 콜스택') 출력
 4. 콜스택이 비면 microtaskqueue에 등록되어 있는 then의 콜백 함수를 콜스택에 push 
 5. 추가 적인 후속처리가 체이닝 되어 있을시 마이크로태스크큐에 push
+
+
+## 실행 순서에 관하여...
+- 다음은 1번이 먼저 출력될까? 아니면 2번이 먼저 출력 될까 ?
+
+``` javascript
+const inner = async () => {
+  const p1 = await new Promise(resolve => 
+    setTimeout(() => resolve(1000), 3000));
+
+  console.log('1번');
+
+  return p1;
+};
+
+const outer = () => {
+  const p2 = inner();
+
+  console.log('2번');
+    
+  return p2;
+}
+
+outer(); 
+```
+
+결과적으로는 outer함수가 실행되고, 이너 함수가 실행되고, 변수 p2는 이너함수의 결과를 기다리지 않고, 프로미스를 즉시 리턴한다.  
+따라서 실행순서는 **2번 -> 1번** 이다. 
+___
+
+다음과 같이 inner() 앞에 await를 붙이면 실행 순서는 어떻게 될까 ?
+``` javascript
+const inner = async () => {
+  const p1 = await new Promise(resolve => 
+    setTimeout(() => resolve(1000), 3000));
+
+  console.log('1번');
+
+  return p1;
+};
+
+const outer = async () => {
+  const p2 = await inner();
+
+  console.log('2번');
+    
+  return p2;
+}
+
+outer(); 
+```
+
+- 실행 순서는 **1번 -> 2번** 이다.
