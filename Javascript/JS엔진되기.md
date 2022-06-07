@@ -13,6 +13,26 @@
     - 한 번 실행되면 이런 화살표 관계는 절대 변경되지 않음으로
     - 들여쓰기 잘하면 좋음
     - → 코드를 분석하는 법을 배웠다.
+    - **추가**
+    ``` javascript
+    let a = 2;
+    setTimeout(() => {
+        console.log(a);
+    }, 0);
+
+    // 설명
+    setTimeout 함수도 전역에서 선언 됐으니 실행 할 수 있는거자나 ?
+    // 스코프 체인
+    setTimeout -> anony 이고 
+    anony는 a값을 갖으므로 접근 가능!
+
+    // 의사코드는 다음과 같음
+    const setTimeout = (fn, ms) => {
+        const fn = () => {};
+        const ms = something;
+        return something...
+    };
+    ```
 - **[1-6]** this는 호출 때 결정된다고!!!
     - node 에서는 global이고, JS에서는 window
     - 사용시 분기 처리 해야하므로 globalThis로 통합됨

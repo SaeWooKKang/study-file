@@ -111,19 +111,30 @@ Promise.resolve('foo')
 ### Promise 정적 메서드
 
 ##### 1. Promise.resolve
+- 전달받은 값을 프로미스로 랩핑 함.
 
-###### 전달받은 값을 프로미스로 랩핑 함.
+다음은 동일하게 동작 한다.  
 ``` javascript
-const resolved = Promise.resolve(5);
-resolved.then(log); // 5
+const p1 = Promise.resolve(2);
+console.log(1);
+p1.then(log); // 2
 
 // 동일하게 동작
-const resolved = new Promise(resolve => resolve(5))
-resolved.then(log);
+const p1 = new Promise(resolve => resolve(2));
+console.log(1);
+p1.then(log);
 ```
+실행 순서: 1 -> 2
+**설명**  
+1. 프로미스 생성자 함수의 콜백함수가 실행
+2. resolve 함수가 실행되어 p1는 fulfilled 상태, 값 2인 프로미스 객체임
+3. console.log(1) 실행
+4. 후속처리메서드 then실행, 콜백함수 bg에 넘김
+5. 후속처리 메서드의 특정 조건 fulfilled를 만족했으므로 마이크로 태스크 큐에 프로미스 값과 후속처리 메서드의 콜백함수 넘김
+6. 전역 콜스택 비면, 이벤트 루프에 의해 마이크로 큐에있는 함수 콜스택에 푸시 
+7. 콘솔 함수 실행, 2찍고 pop됨
 ##### 2. Promise.reject
-
-###### 전달받은 값을 프로미스로 랩핑 함.
+- 전달받은 값을 프로미스로 랩핑 함.
 ``` javascript 
 const rejected = Promise.reject(new Error('error!'));
 rejected.catch(log);
@@ -204,7 +215,20 @@ log('전역 콜스택');
 // 1. 전역 콜스택 
 // 2. 5
 ```
+##### 새로운 이해(22.06.06)
+1. 전역 콜스택
+2. 프로미스 생성자 함수의 콜백함수 실행(프로미스 생성자함수는 동기임)
+3. setTimeout 함수가 실행되고 인자들을 bg에 넘기고 실행 종료
+4. 후속 처리 메서드 then이 실행되어 콜백함수 bg에 넘기고 실행 종료
+5. '전역 콜스택' 출력
+6. 전역 콜스택 종료
+7. bg에서는 특정 조건 만족후 큐로 넘기는데 setTimeout 함수의 조건 1 초후 bg에서 매크로 큐로 콜백함수 넘김 
+8. 이벤트 루프는 콜스택이 비었으므로 매크로 큐에 있는 함수를 콜스택에 푸시
+9. resolve 함수가 실행되어 후속처리메서드의 특정조건 fulfilled가 되었으므로 bg에서 마이크로 태스크 큐로 넘김 
+10. setTimeout 함수의 콜백함수가 pop되고 콜스택이 비면 이벤트 루프는 마이크로 태스크 큐에있는 then의 콜백함수를 콜 스택에 푸시 
+11. 5 출력 후 콜스택에서 pop
 
+##### 이전의 이해
 1. Promise 생성자 함수는 런타임에 평가되어 변수에 할당과 wep api에 처리를 요청 후 즉시 종료
 2. 후속 처리 메서드와 콜백함수를 web api에 넘김  
 >web api는 프로미스를 처리하고 후속 처리 메서드의 콜백함수를 마이크로 테스크 큐에 넘김 
@@ -212,8 +236,10 @@ log('전역 콜스택');
 4. 콜스택이 비면 microtaskqueue에 등록되어 있는 then의 콜백 함수를 콜스택에 push 
 5. 추가 적인 후속처리가 체이닝 되어 있을시 마이크로태스크큐에 push
 
-
+- - -
 ## 실행 순서에 관하여...
+
+### 1번
 - 다음은 1번이 먼저 출력될까? 아니면 2번이 먼저 출력 될까 ?
 
 ``` javascript
@@ -264,3 +290,20 @@ outer();
 ```
 
 - 실행 순서는 **1번 -> 2번** 이다.
+
+### 2번
+
+- Promise 생성자 함수의 콜백함수는 동기적이다. 
+- 콜백함수는 런타임에 호출된다.
+``` javascript
+const p2 = new Promise((resolve) => {
+  console.log(111);
+  setTimeout(() => resolve(333),1000)});
+
+p2.then(console.log);
+
+console.log(222);
+```
+
+- 실행순서: 111 -> 222 -> 333
+
