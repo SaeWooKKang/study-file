@@ -296,9 +296,11 @@ outer();
 - Promise 생성자 함수의 콜백함수는 동기적이다. 
 - 콜백함수는 런타임에 호출된다.
 ``` javascript
-const p2 = new Promise((resolve) => {
+const p2 = new Promise((resolve, reject) => {
   console.log(111);
-  setTimeout(() => resolve(333),1000)});
+  setTimeout(() => resolve(333),1000);
+  reject(err); // 에러가 날 부분 처리
+  });
 
 p2.then(console.log);
 
@@ -307,3 +309,22 @@ console.log(222);
 
 - 실행순서: 111 -> 222 -> 333
 
+### 3번
+- a 함수 먼저 호출 되었고, await 키워드가 붙어있어 1 -> 2 순으로 출력 될것 같지만
+``` javascript
+async function a() {
+  const b = await 1;
+  console.log(b);
+}
+a();
+console.log(2);
+```
+
+- await 키워드 뒤는 전부 비동기이르로 실행 순서는 2 -> 1이다
+``` javascript
+async function a() {
+  return Promise.resovle(1).then(b => { console.log(b) })
+}
+a();
+console.log(2);
+```

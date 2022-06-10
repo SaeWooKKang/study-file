@@ -55,7 +55,7 @@
         }
     };
     // inner의 scope 체인은 
-    // inner -> getName -> 전역 
+    // inner -> getName -> obj -> 전역 
 
     const getN = obj.getName; // 메서드는 함수에 종속되어 있는것이 아닌 
     // 참조값을 저장하고 있는것임 
