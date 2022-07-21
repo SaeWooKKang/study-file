@@ -55,15 +55,11 @@ router.get('/:shortId/find', async (req, res, next) => {
   try {
     let data = await Post.findOne({ shortId });
 
-    console.log(data);
-
     res.json(data);
     
-    // return;
   } catch (e) {
 
     next(e);
-
   }
 });
 

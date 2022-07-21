@@ -7,7 +7,6 @@ $(document).ready(() => {
     type: 'GET',
     url: `http://localhost:3000/posts/${ shortId }/find`,
     success: (res) => {
-      console.log(res);
       $('#title').val(res.title);
       $('#content').val(res.content);
     }

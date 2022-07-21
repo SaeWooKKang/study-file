@@ -1,4 +1,7 @@
-## CRUD 순서도
+# 순서도
+
+## CRUD 
+
 index.html 요청
 <img src='https://user-images.githubusercontent.com/87258182/179981575-f33adff5-35ff-44de-91ac-c8fc4d161c2f.png'>
 
@@ -15,3 +18,11 @@ Update
 
 Delete
 <img src='https://user-images.githubusercontent.com/87258182/179981065-6e2f7000-3c2d-4f51-89f3-89aac0d0a925.png'>
+
+## User
+
+Log In
+<img src='https://user-images.githubusercontent.com/87258182/180194409-2870ca36-2f0d-40f8-b391-366e78fe0c54.png'>
+
+Sign Up
+<img src='https://user-images.githubusercontent.com/87258182/180194211-237e6426-34d1-4d12-b6f9-8a6a8eca3a5d.png'>

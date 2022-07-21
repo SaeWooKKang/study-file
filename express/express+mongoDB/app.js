@@ -4,6 +4,7 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 
 const postsRouter = require('./routes/post');
+const userRouter = require('./routes/user');
 
 const app = express();
 
@@ -25,8 +26,11 @@ app.use(cors());
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
+// post 라우팅
 app.use('/posts', postsRouter);
 
+// user 라우팅
+app.use('/user', userRouter);
 
 app.listen(
   3000,
