@@ -6,6 +6,8 @@ const bodyParser = require('body-parser');
 const postsRouter = require('./routes/post');
 const userRouter = require('./routes/user');
 
+const authMiddleware = require('./utils/authMiddleware');
+
 const app = express();
 
 // DB 연결
@@ -27,7 +29,8 @@ app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // post 라우팅
-app.use('/posts', postsRouter);
+// auth 미들웨어 추가 
+app.use('/posts', authMiddleware, postsRouter);
 
 // user 라우팅
 app.use('/user', userRouter);

@@ -6,6 +6,9 @@ $(document).ready(() => {
   $.ajax({
     type: 'GET',
     url: `http://localhost:3000/posts/${ shortId }/find`,
+    headers: {
+      accessToken: $.cookie('accessToken')
+    },
     success: (res) => {
       $('#title').val(res.title);
       $('#content').val(res.content);

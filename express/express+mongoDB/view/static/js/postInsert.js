@@ -17,11 +17,15 @@ const insertPost = () => {
   // form 태그 내의 input들을 자동으로 읽어와 queryString형으로 변경해줌
   // ?name=name&age=1 => queryString
   let formData = $('#insertForm').serialize();
+  formData += '&email=' + sessionStorage.getItem('email');
   
   $.ajax({
     type: 'post',
     url: 'http://localhost:3000/posts',
     data: formData,
+    headers: {
+      accessToken: $.cookie('accessToken')
+    },
     success: res => {
       alert(res.result);
       location.href = '/view/posts/list.html';

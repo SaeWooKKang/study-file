@@ -1,25 +1,26 @@
 const { Router } = require('express');
-const { Post } = require('./../models');
+const { Post, User } = require('./../models');
 const asyncHandler = require('./../utils/async-handler');
 
 const router = Router();
 
 // get 요청
 router.get('/', async (req, res, next) => {
-  const posts = await Post.find({});
+  const posts = await Post.find({}).populate('author');
   
   res.json(posts);
 });
 
 // post 요청
 router.post('/', async (req, res, next) => {
-  const { title, content } = req.body;
-
+  const { title, content, email } = req.body;
   try {
+    const authData = await User.findOne({ email });
     // 저장된 document 객체 줌
     await Post.create({
       title,
-      content
+      content,
+      author: authData,
     });
 
     res.json({

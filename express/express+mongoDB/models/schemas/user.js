@@ -5,7 +5,8 @@ module.exports = new Schema({
   shortId,
   email: String,
   password: String,
-  name: String
+  name: String,
+  status: false
 }, {
   timestamps: true
 });
