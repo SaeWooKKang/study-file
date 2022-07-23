@@ -1,5 +1,6 @@
 let shortId;
 
+// 서버에서 해당 데이터 받아서 form 채움
 $(document).ready(() => {
   shortId = localStorage.getItem("shortId");
 
@@ -38,6 +39,9 @@ const updatePost = () => {
     type: 'POST',
     url: `http://localhost:3000/posts/${ shortId }/update`,
     data: formData,
+    headers: {
+      accessToken: $.cookie('accessToken')
+    },
     success: res => {
       alert(res.result);
       
@@ -48,3 +52,7 @@ const updatePost = () => {
     }
   });
 }
+
+const backPost = () => {
+  location.href = '/view/posts/list.html';
+};

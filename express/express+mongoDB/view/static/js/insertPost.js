@@ -22,16 +22,18 @@ const insertPost = () => {
   $.ajax({
     type: 'post',
     url: 'http://localhost:3000/posts',
-    data: formData,
     headers: {
       accessToken: $.cookie('accessToken')
     },
+    data: formData,
     success: res => {
       alert(res.result);
       location.href = '/view/posts/list.html';
-
-      return;
     }
   });
 
-}
+};
+
+const backPost = () => {
+  location.href = '/view/posts/list.html';
+};

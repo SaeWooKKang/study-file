@@ -22,6 +22,14 @@ const login = () => {
     url: 'http://localhost:3000/user/login',
     data: loginForm,
     success: res => {
+
+      // 비밀번호 변경 로직
+      if (res.requireSetPassword) {
+        sessionStorage.setItem('email', res.email);
+
+        location.href = '/view/user/setPassword.html';
+        return;
+      } 
       // 브라우저 cookie에 token 저장
       $.cookie(
         "accessToken",
@@ -39,7 +47,7 @@ const login = () => {
       location.href = '/view/posts/list.html';
     },
     error: res => {
-      alert(res.fail);
+      alert(res.responseJSON.fail);
     }
   });
 

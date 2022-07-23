@@ -6,7 +6,9 @@ const router = Router();
 
 // get 요청
 router.get('/', async (req, res, next) => {
-  const posts = await Post.find({}).populate('author');
+  const posts = await Post
+    .find({})
+    .populate('author');
   
   res.json(posts);
 });
@@ -32,6 +34,7 @@ router.post('/', async (req, res, next) => {
   }
 });
 
+// delete
 router.get('/:shortId/delete', async (req, res, next) => {
   const { shortId } = req.params;
 
@@ -50,6 +53,7 @@ router.get('/:shortId/delete', async (req, res, next) => {
 
 });
 
+// find
 router.get('/:shortId/find', async (req, res, next) => {
   const { shortId } = req.params;
 
@@ -64,6 +68,7 @@ router.get('/:shortId/find', async (req, res, next) => {
   }
 });
 
+// update
 router.post('/:shortId/update', async (req, res, next) => {
   const { shortId } = req.params;
   let { title, content } = req.body;

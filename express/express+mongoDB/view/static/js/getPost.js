@@ -29,9 +29,9 @@ const getList = () => {
             <th scope="row">${ index + 1 }</th>
             <td>${ post.title }</td>
             <td>${ post.author.name }</td>
+            <td></td>
           </tr>`;
         }
-       
 
         // append 맨 뒤 추가
         $('.postsList').append(listData);

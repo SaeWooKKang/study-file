@@ -1,5 +1,9 @@
 # 순서도
 
+- [CRUD](#crud)
+- [User](#user)
+- [Middleware](#middleware)
+
 ## CRUD 
 
 index.html 요청
@@ -26,3 +30,11 @@ Log In
 
 Sign Up
 <img src='https://user-images.githubusercontent.com/87258182/180194211-237e6426-34d1-4d12-b6f9-8a6a8eca3a5d.png'>
+
+Find Password
+<img src='https://user-images.githubusercontent.com/87258182/180593468-a1891436-aa92-42a3-adb3-eb7d85f1ff32.png'>
+
+## middleware
+
+authMiddleware
+<img src='https://user-images.githubusercontent.com/87258182/180593432-06361bad-8be9-4f48-bb7e-080b447cb4d4.png'>

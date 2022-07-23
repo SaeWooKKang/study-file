@@ -15,7 +15,8 @@ const findPw = () => {
     url: 'http://localhost:3000/user/find/password',
     data: findForm,
     success: res => {
-      
+      alert(res.result);
+      location.href = '/view/user/login.html';
     },
     error: res => {
       alert(res.fail);
