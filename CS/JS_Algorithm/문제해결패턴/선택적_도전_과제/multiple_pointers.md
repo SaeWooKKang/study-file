@@ -27,7 +27,7 @@ averagePair([], 4) // false
 2. ok
 3. 
 4. 
-- O(n)
+- O(n^2)
 ``` javascript
 const averagePair = (arr, n) => {
   for (let i = 0; i < arr.length; i++) {
