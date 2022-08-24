@@ -26,7 +26,8 @@ Delete
 ## User
 
 Log In
-<img src='https://user-images.githubusercontent.com/87258182/180194409-2870ca36-2f0d-40f8-b391-366e78fe0c54.png'>
+<img src='https://user-images.githubusercontent.com/87258182/186361051-436dcee1-95f3-48b1-902b-a15c3ceab1f9.png'>
+
 
 Sign Up
 <img src='https://user-images.githubusercontent.com/87258182/180194211-237e6426-34d1-4d12-b6f9-8a6a8eca3a5d.png'>
