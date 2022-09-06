@@ -5,8 +5,9 @@ const solution = (arr, value) => {
 
   for (let i = 0; i < arr.length; i++) {
     // 입장은 push 이므로 인덱스 찾을 필요 없고
+
     if (arr[i] > 0) {
-      bar.push(arr[i])// 확진자 리스트에 넣고
+      bar.push(arr[i])// 츌근 리스트에 넣고
       // 입장이면서 확진자라면
       if (arr[i] == value) {
         if (bar[i - 1]) res.add(bar[i - 1]); // 앞에 녀석을 확진자로
@@ -25,8 +26,8 @@ const solution = (arr, value) => {
       // 퇴장 앞이 확진자라면 
       else if (bar[퇴장인덱스 - 1] === value) {
         
-        const back = arr[퇴장인덱스 + 1]; // 퇴장 뒤를 확진자로
-        res.add(back);
+        const back = bar[퇴장인덱스 + 1]; // 퇴장 뒤를 확진자로
+        if (back) res.add(back);
       }
 
       // 퇴장 시키자~
@@ -36,3 +37,5 @@ const solution = (arr, value) => {
   // 오름차순 정렬
   return [...res].sort((a,b) => a - b);
 }
+solution([2,1,3,4,-3,-4,-1,-2,5,-5,1,6,-1,-6], 1) // [2,3,4,6]
+solution([1,2,3,-1,-3,-2],2) //[1,3]
