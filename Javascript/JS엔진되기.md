@@ -185,12 +185,10 @@
         return a + b;
     }
 
-    function a() {
-        return Promise.resolve(1)
-            .then(a => Promise.resove(2)
-            .then(b => a + b)    
-            )
-        }
+   function a() {
+    return Promise.resolve(1)
+        .then(a => Promise.resolve(2).then(b => a + b))
+    }
     ```
 - **[2-6]** 
     - 프로미스 장점은 실행은 바로하되, 결괏값을 나중에 쓸 수 있으므로 순서가 상관 없다면 요청 먼저 하기
